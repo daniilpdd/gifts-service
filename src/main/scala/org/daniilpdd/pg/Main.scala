@@ -1,0 +1,19 @@
+package org.daniilpdd.pg
+
+import org.daniilpdd.pg.services.db.GiftDataBase
+import org.daniilpdd.pg.services.gift.GiftService
+import zio.{Console, Random, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
+
+object Main extends ZIOAppDefault {
+  val program = for {
+    _ <- GiftService.add("router", 12500)
+    _ <- GiftService.add("cake", 200)
+    _ <- GiftService.add("phone", 55500)
+    gifts <- GiftService.getAll
+    _ <- Console.printLine(gifts)
+  } yield ()
+
+  override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = {
+    program.provide(ZLayer.succeed(Console.ConsoleLive), GiftService.live, GiftDataBase.live, ZLayer.succeed(Random.RandomLive))
+  }
+}
