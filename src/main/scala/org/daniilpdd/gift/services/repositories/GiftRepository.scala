@@ -1,4 +1,4 @@
-package org.daniilpdd.gift.services.db
+package org.daniilpdd.gift.services.repositories
 
 import org.daniilpdd.gift.services.gift.Gift
 import zio.macros.accessible
@@ -22,7 +22,7 @@ trait GiftRepository {
 }
 
 object GiftRepository {
-  val live = ZLayer.fromZIO {
+  val live: ZLayer[Console, Nothing, GiftRepositoryLive] = ZLayer.fromZIO {
     for {
       c <- ZIO.service[Console]
     } yield GiftRepositoryLive(c)

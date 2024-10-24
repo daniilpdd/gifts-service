@@ -1,10 +1,14 @@
 package org.daniilpdd.gift.services.gift
 
-import org.daniilpdd.gift.services.db.{GiftRepository, GiftRepositoryError}
+import org.daniilpdd.gift.services.repositories.{GiftRepository, GiftRepositoryError}
+import zio.json.{DeriveJsonDecoder, DeriveJsonEncoder, JsonDecoder, JsonEncoder}
 import zio.macros.accessible
 import zio.{IO, Random, ZIO, ZLayer}
 
 case class Gift(id: Int, name: String, price: Double)
+object Gift {
+  implicit val jsonEncoder: JsonEncoder[Gift] = DeriveJsonEncoder.gen[Gift]
+}
 
 @accessible
 trait GiftService {
