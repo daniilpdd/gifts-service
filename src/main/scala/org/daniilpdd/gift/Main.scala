@@ -1,6 +1,6 @@
 package org.daniilpdd.gift
 
-import org.daniilpdd.gift.services.db.GiftDataBase
+import org.daniilpdd.gift.services.db.GiftRepository
 import org.daniilpdd.gift.services.gift.GiftService
 import zio.{Console, Random, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 
@@ -14,6 +14,6 @@ object Main extends ZIOAppDefault {
   } yield ()
 
   override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] = {
-    program.provide(ZLayer.succeed(Console.ConsoleLive), GiftService.live, GiftDataBase.live, ZLayer.succeed(Random.RandomLive))
+    program.provide(ZLayer.succeed(Console.ConsoleLive), GiftService.live, GiftRepository.live, ZLayer.succeed(Random.RandomLive))
   }
 }
