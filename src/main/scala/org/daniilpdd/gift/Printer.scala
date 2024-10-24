@@ -1,4 +1,4 @@
-package org.daniilpdd.pg
+package org.daniilpdd.gift
 
 import zio.macros.accessible
 import zio.{Console, Task, ZIO, ZLayer}

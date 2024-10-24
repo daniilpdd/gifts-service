@@ -1,7 +1,7 @@
-package org.daniilpdd.pg
+package org.daniilpdd.gift
 
-import org.daniilpdd.pg.services.db.GiftDataBase
-import org.daniilpdd.pg.services.gift.GiftService
+import org.daniilpdd.gift.services.db.GiftDataBase
+import org.daniilpdd.gift.services.gift.GiftService
 import zio.{Console, Random, Scope, ZIO, ZIOAppArgs, ZIOAppDefault, ZLayer}
 
 object Main extends ZIOAppDefault {
