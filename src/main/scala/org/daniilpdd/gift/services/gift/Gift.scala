@@ -18,12 +18,7 @@ trait GiftService {
 }
 
 object GiftService {
-  val live: ZLayer[GiftRepository with Random, Nothing, GiftServiceLive] = ZLayer.fromZIO {
-    for {
-      gdb <- ZIO.service[GiftRepository]
-      rnd <- ZIO.service[Random]
-    } yield GiftServiceLive(gdb, rnd)
-  }
+  val live: ZLayer[GiftRepository with Random, Nothing, GiftServiceLive] = ZLayer.fromFunction(GiftServiceLive.apply _)
 }
 
 case class GiftServiceLive(giftDataBase: GiftRepository, random: Random) extends GiftService {

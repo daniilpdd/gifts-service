@@ -22,11 +22,7 @@ trait GiftRepository {
 }
 
 object GiftRepository {
-  val live: ZLayer[Console, Nothing, GiftRepositoryLive] = ZLayer.fromZIO {
-    for {
-      c <- ZIO.service[Console]
-    } yield GiftRepositoryLive(c)
-  }
+  val live: ZLayer[Console, Nothing, GiftRepositoryLive] = ZLayer.fromFunction(GiftRepositoryLive.apply _)
 }
 
 case class GiftRepositoryLive(console: Console) extends GiftRepository {

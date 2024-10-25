@@ -20,11 +20,7 @@ trait GiftRoutes {
 }
 
 object GiftRoutes {
-  val live: ZLayer[GiftService, Nothing, GiftRoutesLive] = ZLayer.fromZIO {
-    for {
-      giftService <- ZIO.service[GiftService]
-    } yield GiftRoutesLive(giftService)
-  }
+  val live: ZLayer[GiftService, Nothing, GiftRoutesLive] = ZLayer.fromFunction(GiftRoutesLive.apply _)
 }
 
 case class GiftRoutesLive(giftService: GiftService) extends GiftRoutes {
