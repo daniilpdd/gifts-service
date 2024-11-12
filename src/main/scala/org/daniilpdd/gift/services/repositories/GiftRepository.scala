@@ -22,10 +22,10 @@ trait GiftRepository {
 }
 
 object GiftRepository {
-  val live: ZLayer[Console, Nothing, GiftRepositoryLive] = ZLayer.fromFunction(GiftRepositoryLive.apply _)
+  val live: ZLayer[Console, Nothing, GiftRepositoryDummy] = ZLayer.fromFunction(GiftRepositoryDummy.apply _)
 }
 
-case class GiftRepositoryLive(console: Console) extends GiftRepository {
+case class GiftRepositoryDummy(console: Console) extends GiftRepository {
   private val mmap = scala.collection.mutable.Map.empty[Int, Gift]
 
   override def save(gift: Gift): IO[GiftRepositoryError, Unit] =
